@@ -121,5 +121,6 @@ public class OLX_Page extends PageObject {
         return sectorList.get(getListaOfertePosition()).getText();
     }
 
+    // TODO: 8/14/2021 - De adaugat logica , click button next si printeaza lista
 
 }
