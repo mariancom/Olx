@@ -27,5 +27,6 @@ public class OLX_Keywords {
     @Then("the user will get a list of apartments")
     public void theUserWillGetAListOfApartments() {
         olx_steps.olx_printing_list();
+
     }
 }

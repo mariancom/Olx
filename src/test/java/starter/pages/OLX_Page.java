@@ -3,16 +3,17 @@ package starter.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.openqa.selenium.StaleElementReferenceException;
 import starter.GeneralMethods;
 
 import java.util.List;
 
 public class OLX_Page extends PageObject {
 
-    @FindBy(xpath = "//*[@id=\"offers_table\"]/tbody/tr[*]/td/div/table/tbody/tr[2]/td[1]/div/p")
+    @FindBy(xpath = "//tbody/tr[*]/td/div/table/tbody/tr[2]/td[1]/div/p")
     private List<WebElementFacade> sectorList;
 
-    @FindBy(xpath = "//*[@id=\"offers_table\"]/tbody/tr[*]/td/div/table/tbody/tr[1]/td[2]/div")
+    @FindBy(xpath = "//tbody/tr[*]/td/div/table/tbody/tr[1]/td[2]/div")
     private List<WebElementFacade> offerList;
 
     @FindBy(id = "cityField")
@@ -54,6 +55,9 @@ public class OLX_Page extends PageObject {
     @FindBy(id = "onetrust-accept-btn-handler")
     private WebElementFacade acceptBtm;
 
+    @FindBy(xpath = "//div[3]/div/div[4]/span[17]/a")
+    private WebElementFacade nextBtn;
+
     private int listaOfertePosition;
 
     /////Start of methods/////
@@ -80,7 +84,7 @@ public class OLX_Page extends PageObject {
         GeneralMethods.sendKeys(priceFromField, "28000", "Pret - de la");
         GeneralMethods.clickBtn(priceToBtn, "Pret - pana");
         GeneralMethods.sendKeys(priceToField, "40000", "Pret - pana");
-        GeneralMethods.clickBtn(surfaceFieldBtn, "Suprfata - de la");
+        GeneralMethods.clickBtn(surfaceFieldBtn, "Suprafata - de la");
         GeneralMethods.sendKeys(surfaceField, "28", "Suprafata - de la");
         GeneralMethods.clickBtn(searchBtn, "Buton Cauta");
 
@@ -88,7 +92,7 @@ public class OLX_Page extends PageObject {
 
     public void printApartmentList() {
 
-        System.out.println("Printing Apartment List:" + System.lineSeparator());
+        System.out.println("Printing Apartment List:");
 
         //Declarat variabila locala offerListSize = cu valoare size de offer list
         int offerListSize = offerList.size();
@@ -102,10 +106,11 @@ public class OLX_Page extends PageObject {
             //Setter lista offerte cu valoarea i -ului
             this.listaOfertePosition = i;
 
-            if (getSectorList().contains("Sectorul 6") || (getSectorList().contains("Sectorul 5")) ){
+            if (getSectorList().contains("Sectorul 6") || (getSectorList().contains("Sectorul 5"))) {
                 continue;
             } else {
-                System.out.println(valueOffer + getSectorList());
+                int start = getSectorList().indexOf(",");
+                System.out.println(valueOffer + " -" + getSectorList().substring(start + 1));
             }
 
         }
@@ -121,6 +126,16 @@ public class OLX_Page extends PageObject {
         return sectorList.get(getListaOfertePosition()).getText();
     }
 
-    // TODO: 8/14/2021 - De adaugat logica , click button next si printeaza lista
+    public void iterateThroughPagesAndPrint() {
+        int pageNr = 1;
+        while (nextBtn.isPresent()) {
+            System.out.println();
+            System.out.println("Page number is " + pageNr++ + " " + getDriver().getCurrentUrl());
+            GeneralMethods.clickBtn(nextBtn, "next");
+            printApartmentList();
+        }
+    }
+
+    // TODO: 8/16/2021 Solve Stale element exception problem
 
 }

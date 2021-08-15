@@ -3,6 +3,7 @@ package starter;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.openqa.selenium.ElementClickInterceptedException;
 import org.openqa.selenium.ElementNotInteractableException;
+import org.openqa.selenium.StaleElementReferenceException;
 
 import java.util.NoSuchElementException;
 
@@ -17,6 +18,8 @@ public class GeneralMethods {
             System.out.println("Button " + buttonName + " not present");
         } catch (ElementClickInterceptedException ecie){
             System.out.println("Button " + buttonName + "intercepted exception");
+        } catch (StaleElementReferenceException sere){
+            System.out.println("Button " + buttonName + "stale element exception");
         }
     }
 
