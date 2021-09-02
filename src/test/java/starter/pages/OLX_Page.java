@@ -3,10 +3,14 @@ package starter.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
-import org.openqa.selenium.StaleElementReferenceException;
+import org.junit.Test;
+import starter.CaptureLogs;
 import starter.GeneralMethods;
 
 import java.util.List;
+
+//
+
 
 public class OLX_Page extends PageObject {
 
@@ -59,6 +63,7 @@ public class OLX_Page extends PageObject {
     private WebElementFacade nextBtn;
 
     private int listaOfertePosition;
+    private starter.CaptureLogs CaptureLogs;
 
     /////Start of methods/////
 
@@ -138,4 +143,11 @@ public class OLX_Page extends PageObject {
 
     // TODO: 8/16/2021 Solve Stale element exception problem
 
+
+    @Test
+         public void hello(){
+         getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
+//         CaptureLogs.main();
+
+   }
 }
