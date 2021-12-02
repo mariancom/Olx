@@ -4,15 +4,15 @@ import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
 import org.junit.Test;
-import starter.CaptureLogs;
 import starter.GeneralMethods;
+import starter.utils.LoggerClass;
 
+import java.math.BigDecimal;
 import java.util.List;
-
-//
-
+import java.util.Random;
 
 public class OLX_Page extends PageObject {
+
 
     @FindBy(xpath = "//tbody/tr[*]/td/div/table/tbody/tr[2]/td[1]/div/p")
     private List<WebElementFacade> sectorList;
@@ -62,8 +62,9 @@ public class OLX_Page extends PageObject {
     @FindBy(xpath = "//div[3]/div/div[4]/span[17]/a")
     private WebElementFacade nextBtn;
 
+    private static final String LOCATOR = "return document.querySelector(\"iron-icon\")";
+
     private int listaOfertePosition;
-    private starter.CaptureLogs CaptureLogs;
 
     /////Start of methods/////
 
@@ -97,7 +98,7 @@ public class OLX_Page extends PageObject {
 
     public void printApartmentList() {
 
-        System.out.println("Printing Apartment List:");
+        LoggerClass.info("Printing Apartment List:");
 
         //Declarat variabila locala offerListSize = cu valoare size de offer list
         int offerListSize = offerList.size();
@@ -115,7 +116,7 @@ public class OLX_Page extends PageObject {
                 continue;
             } else {
                 int start = getSectorList().indexOf(",");
-                System.out.println(valueOffer + " -" + getSectorList().substring(start + 1));
+                LoggerClass.info(valueOffer + " -" + getSectorList().substring(start + 1));
             }
 
         }
@@ -135,19 +136,9 @@ public class OLX_Page extends PageObject {
         int pageNr = 1;
         while (nextBtn.isPresent()) {
             System.out.println();
-            System.out.println("Page number is " + pageNr++ + " " + getDriver().getCurrentUrl());
+            LoggerClass.test("Page number is " + pageNr++ + " " + getDriver().getCurrentUrl());
             GeneralMethods.clickBtn(nextBtn, "next");
             printApartmentList();
         }
     }
-
-    // TODO: 8/16/2021 Solve Stale element exception problem
-
-
-    @Test
-         public void hello(){
-         getDriver().get("https://en.wikipedia.org/wiki/Main_Page");
-//         CaptureLogs.main();
-
-   }
 }

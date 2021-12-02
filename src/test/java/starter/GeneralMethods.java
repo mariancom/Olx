@@ -1,8 +1,12 @@
 package starter;
 
 import net.serenitybdd.core.pages.WebElementFacade;
+import net.thucydides.core.webdriver.exceptions.ElementShouldBeEnabledException;
+import org.junit.Test;
 import org.openqa.selenium.*;
+import starter.utils.LoggerClass;
 
+import java.math.BigDecimal;
 import java.util.NoSuchElementException;
 
 import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver;
@@ -10,16 +14,17 @@ import static net.thucydides.core.webdriver.ThucydidesWebDriverSupport.getDriver
 public class GeneralMethods {
 
     public static void clickBtn(WebElementFacade webElementFacade, String buttonName) {
-
         try {
-            System.out.println("Clicking " + buttonName);
+            LoggerClass.info("Clicking " + buttonName);
             webElementFacade.waitUntilClickable().click();
         } catch (NoSuchElementException nse) {
-            System.out.println("Button " + buttonName + " not present");
+            LoggerClass.info("Button " + buttonName + " not present");
         } catch (ElementClickInterceptedException ecie) {
-            System.out.println("Button " + buttonName + "intercepted exception");
+            LoggerClass.info("Button " + buttonName + "intercepted exception");
         } catch (StaleElementReferenceException sere) {
-            System.out.println("Button " + buttonName + "stale element exception");
+            LoggerClass.info("Button " + buttonName + "stale element exception");
+        } catch (ElementShouldBeEnabledException esee) {
+            LoggerClass.info("Button" + buttonName + "should be enabled exception");
         }
     }
 
@@ -27,25 +32,23 @@ public class GeneralMethods {
 
         try {
             webElementFacade.waitUntilClickable();
-            System.out.println("Sending keys " + keys + " on " + elementName);
+            LoggerClass.info("Sending keys " + keys + " on " + elementName);
             webElementFacade.sendKeys(keys);
         } catch (NoSuchElementException nse) {
-            System.out.println("Field " + elementName + " not present");
+            LoggerClass.info("Field " + elementName + " not present");
         } catch (ElementNotInteractableException enie) {
-            System.out.println("Field " + elementName + " is not interactable");
+            LoggerClass.info("Field " + elementName + " is not interactable");
         }
 
     }
 
-    public static void shadowClick(String locator, String argument, String elementName) {
+    public static void clickShadowRoot(String locator) { //locator return + document query...
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
-        WebElement webElement = (WebElement) jse.executeScript(locator);
-        System.out.println("Clicking on shadowRoot element " + elementName);
-        ((JavascriptExecutor) getDriver()).executeScript(argument, webElement);
+        WebElement cartIcon = (WebElement) jse.executeScript(locator);
+        String js = "arguments[0].click()";
+        ((JavascriptExecutor) getDriver()).executeScript(js, cartIcon);
+
     }
-
-
-
 
 }
 

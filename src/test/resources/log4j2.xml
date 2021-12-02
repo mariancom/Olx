@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+    <Properties>
+        <Property name="name">log4j2_MobileTestLogs</Property>
+        <Property name="pattern"
+                  value="%style{%d{yyyy-MM-dd HH:mm:ss.SSS}}{bright black} | %highlight{[%-5level]}{FATAL=red blink, ERROR=red bright bold, WARN=magenta bright bold, INFO=blue bright bold, TRACE=white, TEST=yellow bright bold, PASS=green bright bold} | %highlight{%m%n%throwable}{FATAL=red blink, ERROR=red bright bold, WARN=magenta, INFO=pink , DEBUG=cyan bright blink, TRACE=white, TEST=yellow bright bold, PASS=green bright bold}"/>
+        <Property name="patternRP"
+                  value="[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%-5level] | %m%n%throwable"/>
+        <Property name="log4j2.skipJansi" value="false"/>
+        <Property name="skipJansi" value="false"/>
+        <Property name="logLevel">ALL</Property>
+    </Properties>
+
+    <!--%c{10} will enable package name for printing-->
+
+    <CustomLevels>
+        <CustomLevel name="TEST" intLevel="400"/>
+    </CustomLevels>
+
+    <CustomLevels>
+        <CustomLevel name="PASS" intLevel="400"/>
+    </CustomLevels>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${pattern}" disableAnsi="false"/>
+        </Console>
+        <!--        <ReportPortalLog4j2Appender name="ReportPortalAppender">-->
+        <!--            <PatternLayout pattern="${patternRP}" disableAnsi="false"/>-->
+        <!--        </ReportPortalLog4j2Appender>-->
+        <File name="File-Appender" fileName="target/extraLogs.log">
+            <PatternLayout pattern="${pattern}"/>
+        </File>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="org.apache" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="org.testng.ITest" level="ERROR" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="org.testng" level="ERROR" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="httpclient" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="com.jayway.restassured" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.restassured" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium.java_client" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium.java_client.remote" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium.java_client.remote.AppiumCommandExecutor" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium.java_client.remote.AppiumCommandExecutor$1" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium.java_client.service.local.AppiumServiceBuilder" level="ERROR" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="io.appium.java_client.service" level="ERROR" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="com.aventstack" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="com.mongodb" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="org.mongodb" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="org.apache-extras.beanshell" level="WARN" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+        <Logger name="com.datastax.oss.driver" level="ERROR" additivity="false">
+            <AppenderRef ref="File-Appender"/>
+        </Logger>
+
+        <Root level="${sys:logLevel}">
+            <AppenderRef ref="Console"/>
+            <!--            <AppenderRef ref="ReportPortalAppender"/>-->
+            <!--            <Appender-ref ref="ReportPortalAppender"/>-->
+            <!--     <AppenderRef ref="RollingFile"/>-->
+        </Root>
+    </Loggers>
+</Configuration>
+
+        <!--
+                Standard Level	intLevel
+                OFF	            0
+                FATAL	        100
+                ERROR	        200
+                WARN	        300
+                INFO	        400
+                DEBUG	        500
+                TRACE	        600
+                ALL	Integer.MAX_VALUE-->
