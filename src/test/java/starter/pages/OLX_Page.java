@@ -3,13 +3,12 @@ package starter.pages;
 import net.serenitybdd.core.annotations.findby.FindBy;
 import net.serenitybdd.core.pages.PageObject;
 import net.serenitybdd.core.pages.WebElementFacade;
+import org.junit.Assert;
 import org.junit.Test;
 import starter.GeneralMethods;
 import starter.utils.LoggerClass;
 
-import java.math.BigDecimal;
 import java.util.List;
-import java.util.Random;
 
 public class OLX_Page extends PageObject {
 
@@ -66,8 +65,8 @@ public class OLX_Page extends PageObject {
 
     private int listaOfertePosition;
 
-    /////Start of methods/////
 
+    /////Start of methods/////
     public void navigateToOLXSite() {
         getDriver().get("https://www.olx.ro/");
     }
@@ -118,7 +117,6 @@ public class OLX_Page extends PageObject {
                 int start = getSectorList().indexOf(",");
                 LoggerClass.info(valueOffer + " -" + getSectorList().substring(start + 1));
             }
-
         }
     }
 

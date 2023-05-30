@@ -12,10 +12,10 @@ public class OLX_Keywords {
     @Steps
     OLX_Steps olx_steps;
 
+
     @Given("the user navigates to OLX")
     public void theUserNavigatesToOLX() {
         olx_steps.olx_navigation();
-
     }
 
     @When("the user searches for apartments")

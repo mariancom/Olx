@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 public class CaptureScreenShot {
     private static final DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_SSS");
 
-    private static final String WINDOWS_SS_DIR_WITH_SS_BASE = System.getProperty("user.dir") + "\\Test-ScreenShots";
+    private static final String WINDOWS_SS_DIR_WITH_SS_BASE = System.getProperty("user.dir") + "\\starter.keywords.Test-ScreenShots";
     private static String WINDOWS_SS_DIR_WITH_SS;
 
     public static String captureScreen(WebDriver driver) {

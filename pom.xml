@@ -100,8 +100,8 @@
                 <version>3.0.0-M5</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>
-                        <include>**/Test*.java</include>
+                        <include>**/*starter.keywords.Test.java</include>
+                        <include>**/starter.keywords.Test*.java</include>
                         <include>**/*TestSuite.java</include>
                         <include>**/When*.java</include>
                     </includes>

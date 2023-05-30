@@ -66,7 +66,7 @@ public class LoggerClass {
     public void colorsTest() {
         System.out.println("System out text");
         LoggerClass.info("Info text");
-        LoggerClass.test("Test text"); //pt informatii folositoare
+        LoggerClass.test("starter.keywords.Test text"); //pt informatii folositoare
         LoggerClass.warn("Warn text"); //de monitorizat
         LoggerClass.error("Error text");
         LoggerClass.debug("Debug text"); // pt informatii folositoare doar temporar (alta culoare)
@@ -79,7 +79,7 @@ public class LoggerClass {
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-            <version>2.14.1</version>
+            <version>2.17.2</version>
         </dependency>
 
 
@@ -87,7 +87,7 @@ public class LoggerClass {
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
-            <version>2.14.1</version>
+            <version>2.17.2</version>
         </dependency>
         *
         * Fisiere: LoggerClass, log4j.properties, log4j2.xml*/
